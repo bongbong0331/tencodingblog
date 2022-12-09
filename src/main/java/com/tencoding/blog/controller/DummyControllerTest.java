@@ -3,6 +3,7 @@ package com.tencoding.blog.controller;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tencoding.blog.dto.User;
@@ -75,8 +77,25 @@ public class DummyControllerTest {
 
 		// 로직 수행
 		return "회원가입이 완료되었습니다.";
-
 	}
+	
+	//파싱중
+	// form 에서 넘긴 name 의 키 값과 같아야한다.!!
+	@PostMapping("/signup2")
+	public String signUp2(String username, String password, String email) {
+
+		User reqUser = new User();
+		reqUser.setUsername(username);
+		reqUser.setPassword(password);
+		reqUser.setEmail(email);
+		reqUser.setRole(RoleType.USER); // 추가
+		
+		userRepository.save(reqUser);
+
+		// 로직 수행
+		return "회원가입이 완료되었습니다.";
+	}
+	
 
 	// 회원 수정
 	@Transactional // 트랜잭션 기본 의미, 함수 종료시에 더티체킹을 하고 수정된 데이터가 있다면 commit 이 된다.
@@ -113,5 +132,16 @@ public class DummyControllerTest {
 		return "삭제되었습니다 : " + id;
 
 	}
+	
+	// 스프링의 기본 파싱 전략
+	// http://localhost:9090/blog/dummy/user/test?name=봉봉&age=10
+	// form 태그로 넘어오는 녀석도 처리가 가능하다.
+	@GetMapping("/user/test")   // ?
+	public String getTest( String name, int age) {
+		System.out.println("name  " + name);
+		System.out.println("age" + age);
+		return "";
+	}
+	
 
 }

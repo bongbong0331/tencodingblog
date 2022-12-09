@@ -30,5 +30,10 @@ public class TempController {
 		// /WEB-INF/views/test.jsp
 		return "test";  // 슬러쉬 안붙이면 오류남
 	}
-
+	
+	@GetMapping("/temp/join")
+	public String join() {
+		
+		return "/join";
+	}
 }
