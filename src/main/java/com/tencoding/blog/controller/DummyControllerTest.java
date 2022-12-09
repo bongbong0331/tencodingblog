@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,7 +79,7 @@ public class DummyControllerTest {
 	}
 
 	// 회원 수정
-	@Transactional  // 트랜잭션 기본 의미, 함수 종료시에 더티체킹을 하고 수정된 데이터가 있다면 commit 이 된다.
+	@Transactional // 트랜잭션 기본 의미, 함수 종료시에 더티체킹을 하고 수정된 데이터가 있다면 commit 이 된다.
 	@PutMapping("/user/{id}")
 	public User updateUser(@PathVariable int id, @RequestBody User reqUser) {
 
@@ -92,11 +93,24 @@ public class DummyControllerTest {
 		});
 
 		user.setPassword(reqUser.getPassword());
-		user.setEmail(reqUser.getEmail()); 
-		
+		user.setEmail(reqUser.getEmail());
+
 //		userRepository.save(user);
 
-		return null;
+		return user;
+
+	}
+
+	@DeleteMapping("/user/{id}")
+	public String delete(@PathVariable int id) {
+
+		try {
+			userRepository.deleteById(id);
+		} catch (Exception e) {
+			return "사용자를 찾을 수 없습니다";
+		}
+
+		return "삭제되었습니다 : " + id;
 
 	}
 
