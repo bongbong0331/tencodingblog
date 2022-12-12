@@ -3,7 +3,7 @@
 
 <div class="card m-2">
 	<div class="card-body">
-		<h4>블로그 제목 부분</h4>
+		<h4>1</h4>
 		<p>블로그 내용 부분</p>
 		<a href="#" class="btn btn-primary">상세보기</a>
 	</div>
@@ -12,7 +12,7 @@
 <br>
 <div class="card m-2">
 	<div class="card-body">
-		<h4>블로그 제목 부분</h4>
+		<h4>2</h4>
 		<p>블로그 내용 부분</p>
 		<a href="#" class="btn btn-primary">상세보기</a>
 	</div>
@@ -21,7 +21,7 @@
 <br>
 <div class="card m-2">
 	<div class="card-body">
-		<h4>블로그 제목 부분</h4>
+		<h4>3</h4>
 		<p>블로그 내용 부분</p>
 		<a href="#" class="btn btn-primary">상세보기</a>
 	</div>
@@ -30,7 +30,7 @@
 <br>
 <div class="card m-2">
 	<div class="card-body">
-		<h4>블로그 제목 부분</h4>
+		<h4>4</h4>
 		<p>블로그 내용 부분</p>
 		<a href="#" class="btn btn-primary">상세보기</a>
 	</div>
