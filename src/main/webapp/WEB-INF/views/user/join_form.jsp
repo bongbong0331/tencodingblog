@@ -5,7 +5,7 @@
 
 <div class="container">
 
-	<form action="">
+	<form>
 		<div class="form-group">
 			<label for="username">username:</label> <input type="text" class="form-control" placeholder="username" id="username" value="홍길동">
 		</div>
@@ -16,10 +16,10 @@
 			<label for="email">email:</label> <input type="email" class="form-control" placeholder="Enter email" id="email" value="a@asd.asd">
 		</div>
 	</form>
-		<button type="button" id="btn--save" class="btn btn-primary">signUp</button>
+	<button type="button" id="btn--save" class="btn btn-primary">signUp</button>
 </div>
 <script type="text/javascript" src="/js/user.js">
-
+	
 </script>
 
 <%@ include file="../layout/footer.jsp"%>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -28,17 +28,17 @@ public class UserController {
 		return "user/join_form";
 	}
 
-	// 기존 스프링에서 로그아웃 처리는 -- 따로 정리 !! 
+	// 기존 스프링에서 로그아웃 처리는 -- 따로 정리 !!
 	@GetMapping("/logout")
 	public String logout() {
 
 		HttpSession httpSession = session;
 		httpSession.invalidate(); // 로그아웃 처리
-		
+
 		System.out.println("11111111111111");
 		return "/index";
 	}
-	
+
 //	// 기존 스프링에서 로그아웃 처리는 -- 따로 정리 !! 
 //		@GetMapping("/logout")
 //		public String logout() {
@@ -47,9 +47,7 @@ public class UserController {
 //			httpSession.invalidate(); // 로그아웃 처리
 //			
 //			System.out.println("11111111111111");
-//			return "/index";
+//			return "redirect:/";
 //		}
-	
-	
-	
+
 }

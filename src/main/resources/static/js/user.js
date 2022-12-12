@@ -4,11 +4,11 @@ let index = {
 		$("#btn--save").bind("click", () => {
 			this.save();
 		});
-		
+
 		$("#btn--login").bind("click", () => {
 			this.login();
-			
-		});		
+
+		});
 	},
 
 	save: function() {
@@ -44,30 +44,30 @@ let index = {
 		});
 
 	},
-	
-	login: function(){
-		
+
+	login: function() {
+
 		let data = {
 			username: $("#username").val(),
 			password: $("#password").val()
-			
+
 		};
-		
+
 		$.ajax({
 			type: "POST",
 			url: "/api/user/login",
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
-			
-		}).done(function(data, textStatus, xhr){
+
+		}).done(function(data, textStatus, xhr) {
 			alert("로그인 성공");
 			console.log(data);
 			location.href = "/";
-		}).fail(function(error){
+		}).fail(function(error) {
 			alert("로그인 실패");
 		});
-		
+
 	}
 
 
