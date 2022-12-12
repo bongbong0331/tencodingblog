@@ -39,7 +39,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  // 프로젝트에서 연결된 DB 넘버링 전략을 따라 간다.(auto_increment)
 	private int id;
 	
-	@Column(nullable = false, length = 30)	
+	// unique = true 제약 추가 !!!!
+	@Column(nullable = false, length = 30, unique = true)	
 	private String username;
 	
 	@Column(nullable = false, length = 100)
