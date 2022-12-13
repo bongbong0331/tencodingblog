@@ -44,12 +44,12 @@ public class UserService {
 	}
 
 	
-	public User login(User user) {
-		// 기본 Repository 에 필요한 함수가 없을 경우 직접 생성하면 된다.
-//		userRepository.get
-//		User userEntity = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		User userEntity = userRepository.login(user.getUsername(), user.getPassword());
-		System.out.println("userEntity : " + userEntity);
-		return userEntity;
-	}
+//	public User login(User user) {
+//		// 기본 Repository 에 필요한 함수가 없을 경우 직접 생성하면 된다.
+////		userRepository.get
+////		User userEntity = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//		User userEntity = userRepository.login(user.getUsername(), user.getPassword());
+//		System.out.println("userEntity : " + userEntity);
+//		return userEntity;
+//	}
 }

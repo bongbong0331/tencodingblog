@@ -26,7 +26,7 @@ let index = {
 		$.ajax({
 			// 회원가입 요청
 			type: "POST",
-			url: "/api/user",
+			url: "/auth/joinProc",
 			data: JSON.stringify(data), // http 메세지 body 영역에 들어 감! ! ! 
 			contentType: "application/json; charset=utf-8",  // 보낼 때 데이터 타입
 			dataType: "json"    // 응답이 왔을 때 MIME TYPE 지정  JSON --->  javaScript Object 자동 변환
