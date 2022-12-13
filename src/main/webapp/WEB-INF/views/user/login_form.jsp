@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
-
+<!-- /auth/loginProc  < --- 이녀석은 SecurityConfig 에 .loginProcessingUrl("/auth/loginProc") 있음 -->
 <div class="container">
 
 	<form action="/auth/loginProc" method="post">
