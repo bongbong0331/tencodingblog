@@ -1,5 +1,7 @@
 package com.tencoding.blog.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tencoding.blog.dto.User;
@@ -9,6 +11,11 @@ import com.tencoding.blog.dto.User;
 //@Repository
 
 public interface UserRepository extends JpaRepository<User, Integer> { // 테이블명, PK 데이터타입
+	
+	// SELECT * FROM user WHERE username = ?1;
+	Optional<User> findByUsername(String username);
+	
+	
 
 	// 없는 함수는 직접 함수를 만들거나 또는 spring JAP 네이밍 전략 이 있다.
 

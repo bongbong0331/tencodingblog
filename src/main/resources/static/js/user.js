@@ -45,7 +45,7 @@ let index = {
 
 	},
 
-	login: function() {
+/*	login: function() {
 
 		let data = {
 			username: $("#username").val(),
@@ -68,7 +68,7 @@ let index = {
 			alert("로그인 실패");
 		});
 
-	}
+	}*/
 
 
 

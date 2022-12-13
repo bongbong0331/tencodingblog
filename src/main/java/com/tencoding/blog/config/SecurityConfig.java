@@ -1,12 +1,17 @@
 package com.tencoding.blog.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.tencoding.blog.auth.PrincipalDetailService;
 
 @Configuration   // IoC 관리
 @EnableWebSecurity   // 시큐리티 필터로 등록이 된다 ( 필터 커스텀 )
@@ -20,7 +25,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	@Autowired
+	private PrincipalDetailService principalDetailService; 
 	
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 1. userDetailsService 들어갈 Object 만들어 주어야 한다.
+		// 2. passwordEncoder 우리가 사용하는 해시 암호화 함수를 알려주어야 한다. 스프링시큐리티 에게
+		
+		// 1. 우리가 커스텀한 녀석을 넣어야 한다.
+		// 2. BCryptPasswordEncoder 사용하여 암호화 하였다.
+		System.out.println("auth >>>>>: " + auth);
+		auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
+		
+	}
 	
 	
 	

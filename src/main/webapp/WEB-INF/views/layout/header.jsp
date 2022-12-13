@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authorize access="isAuthenticated()">
-    Welcome Back, <sec:authentication property="name" />
-    Welcome Back, <sec:authentication property="principal" var="principal"/>
+    <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
 <!DOCTYPE html>
@@ -17,7 +16,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
 
 
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
