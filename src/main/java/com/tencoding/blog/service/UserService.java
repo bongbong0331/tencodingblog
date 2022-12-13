@@ -3,6 +3,7 @@ package com.tencoding.blog.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tencoding.blog.dto.User;
@@ -23,6 +24,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	/*
 	 * 작업의 단위
@@ -34,8 +38,16 @@ public class UserService {
 	public int saveUser(User user) {
 
 		try {
+			// 비밀번호를 넣을 때 여기서 암호화 처리 하고 DB 저장 하기 !
+			String rawPassword = user.getPassword();
+			String encPassword = encoder.encode(rawPassword); //암호화 처리
+			user.setPassword(encPassword);
 			user.setRole(RoleType.USER);
 			userRepository.save(user);
+//			System.out.println("encPassword : " + encPassword);
+			// $2a$10$kesKOWA9SSvU1LsxVoaBS.e/UCqB.f39VvmCyU2l4bSR7endWfq1m
+			// $2a$10$lkr.rTM.kEMYHtoNu86DJuGnThSx3gLNAG5HJrxz.ozfqPTv7XNQq
+			
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();

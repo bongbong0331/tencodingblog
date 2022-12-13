@@ -7,7 +7,7 @@
 
 	<form>
 		<div class="form-group">
-			<label for="username">username:</label> <input type="text" class="form-control" placeholder="username" id="username" value="홍길동">
+			<label for="username">username:</label> <input type="text" class="form-control" placeholder="username" id="username" value="teco">
 		</div>
 		<div class="form-group">
 			<label for="password">password:</label> <input type="password" class="form-control" placeholder="Enter password" id="password" value="asd123">

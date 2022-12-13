@@ -32,6 +32,10 @@ public class UserApiController {
 
 		return new ResponseDto<Integer>(HttpStatus.OK, result); // 자바 OBJECT --> JSON 형식으로
 	}
+	
+	
+	
+	
 
 //	@PostMapping("/user/login")
 //	public ResponseDto<Integer> login(@RequestBody User user) {
