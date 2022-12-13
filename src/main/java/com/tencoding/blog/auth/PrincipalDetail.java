@@ -21,6 +21,14 @@ public class PrincipalDetail implements UserDetails {
 		this.user = user;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	/**
 	 * 계정의 권한을 반환 처리
 	 */
@@ -36,7 +44,9 @@ public class PrincipalDetail implements UserDetails {
 //			}
 //		});
 		// 똑같은것
-		collection.add(() -> {return "ROLE_" + user.getRole();} );
+		collection.add(() -> {
+			return "ROLE_" + user.getRole();
+		});
 		return collection;
 	}
 
