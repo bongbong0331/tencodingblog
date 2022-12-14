@@ -32,7 +32,7 @@ let index = {
 		});
 		
 		/**
-		람다식 
+		람다식 -
 		fail((error) => {
 			console.log(error);
 			alert(error.responseJSON.error)

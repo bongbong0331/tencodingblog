@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		// 1. 우리가 커스텀한 녀석을 넣어야 한다.
 		// 2. BCryptPasswordEncoder 사용하여 암호화 하였다.
-		System.out.println("auth >>>>>: " + auth);
+//		System.out.println("auth >>>>>: " + auth);
 		auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
 		
 	}

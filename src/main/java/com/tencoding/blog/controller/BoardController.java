@@ -1,10 +1,16 @@
 package com.tencoding.blog.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.tencoding.blog.auth.PrincipalDetail;
+import com.tencoding.blog.dto.Board;
+import com.tencoding.blog.service.BoardService;
 
 @Controller
 public class BoardController {
@@ -15,12 +21,15 @@ public class BoardController {
 	 * 
 	 */
 
+	@Autowired
+	private BoardService boardService;
+
 	@GetMapping({ "", "/" })
-	public String index(@AuthenticationPrincipal PrincipalDetail principal) {
-		if (principal != null) {
-			System.out.println(principal.getUsername());
-			System.out.println(principal.getAuthorities());
-		}
+	public String index(Model model) {
+		
+		List<Board> boards = boardService.getBoardList();
+		model.addAttribute("boards", boards);   // jsp 파일에서 model 추상화객체를 이용하여 컨트롤러에서 내려 준 데이터를 접근할 수 있다.
+		
 		return "index";
 	}
 
