@@ -3,6 +3,10 @@ package com.tencoding.blog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +28,20 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	// ?page=2
 	@GetMapping({ "", "/" })
-	public String index(Model model) {
+	public String index(Model model, 
+			@PageableDefault(size = 1, sort = "id", direction = Direction.DESC) Pageable pageable) {
 		
-		List<Board> boards = boardService.getBoardList();
+		Page<Board> boards = boardService.getBoardList(pageable);
+		
+		
+		boards.stream().forEach((item) -> {
+			System.out.println(item);
+		});
+		
 		model.addAttribute("boards", boards);   // jsp 파일에서 model 추상화객체를 이용하여 컨트롤러에서 내려 준 데이터를 접근할 수 있다.
+		
 		
 		return "index";
 	}

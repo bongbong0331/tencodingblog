@@ -1,42 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="layout/header.jsp"%>
 
-<div class="card m-2">
-	<div class="card-body">
-		<h4>1</h4>
-		<p>블로그 내용 부분</p>
-		<a href="#" class="btn btn-primary">상세보기</a>
+
+
+
+<c:forEach var="board" items="${boards.content}">
+
+	<div class="card m-2">
+		<div class="card-body">
+			<h4>${board.title}</h4>
+			<p>${board.content}</p>
+			<a href="#" class="btn btn-primary">상세보기</a>
+		</div>
 	</div>
+</c:forEach>
 
-</div>
-<br>
-<div class="card m-2">
-	<div class="card-body">
-		<h4>2</h4>
-		<p>블로그 내용 부분</p>
-		<a href="#" class="btn btn-primary">상세보기</a>
-	</div>
+<ul class="pagination justify-content-center">
 
-</div>
-<br>
-<div class="card m-2">
-	<div class="card-body">
-		<h4>3</h4>
-		<p>블로그 내용 부분</p>
-		<a href="#" class="btn btn-primary">상세보기</a>
-	</div>
-
-</div>
-<br>
-<div class="card m-2">
-	<div class="card-body">
-		<h4>4</h4>
-		<p>블로그 내용 부분</p>
-		<a href="#" class="btn btn-primary">상세보기</a>
-	</div>
-
-</div>
-
+	<li class="page-item"><a class="page-link" href="?page=${boards.number - 1 }">Previous</a></li>
+	
+	<li class="page-item"><a class="page-link" href="?page=${boards.number + 1 }">Next</a></li>
+	
+</ul>
 
 <%@ include file="layout/footer.jsp"%>
 
