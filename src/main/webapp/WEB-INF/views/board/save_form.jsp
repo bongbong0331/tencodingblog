@@ -12,6 +12,7 @@
 			<label for="title">Title</label>
 			<input type="text" name="title" id="title" class="form-control" >
 		</div>
+		
 		<div class="form-group">
 			<label for="content">Content</label>
 			<textarea name="content" id="content"  rows="5" class="form-control content" ></textarea>
@@ -32,3 +33,6 @@
 </script>
 
 <%@ include file="../layout/footer.jsp" %>
+
+
+

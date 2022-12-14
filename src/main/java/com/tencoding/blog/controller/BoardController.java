@@ -31,22 +31,20 @@ public class BoardController {
 
 	// ?page=2
 	@GetMapping({ "", "/" })
-	public String index(Model model, 
+	public String index(Model model,
 			@PageableDefault(size = 3, sort = "id", direction = Direction.DESC) Pageable pageable) {
-		
-		
+
 		Page<Board> boards = boardService.getBoardList(pageable);
-		
+
 //		page.first == true, false  < -- 첫번째 페이지 true
 //				page.last == true, false  < -- 마지막 페이지 last 
-		
+
 		boards.stream().forEach((item) -> {
 			System.out.println(item);
 		});
-		
-		model.addAttribute("boards", boards);   // jsp 파일에서 model 추상화객체를 이용하여 컨트롤러에서 내려 준 데이터를 접근할 수 있다.
-		
-		
+
+		model.addAttribute("boards", boards); // jsp 파일에서 model 추상화객체를 이용하여 컨트롤러에서 내려 준 데이터를 접근할 수 있다.
+
 		return "index";
 	}
 
@@ -54,15 +52,22 @@ public class BoardController {
 	public String saveForm() {
 		return "/board/save_form";
 	}
-	
+
 	@GetMapping("/board/{id}")
 	public String showDetail(@PathVariable int id, Model model) {
-			
+
 		model.addAttribute("board", boardService.boardDetail(id));
-		
+
 		return "/board/detail";
 	}
 	
 	
+	@GetMapping("/board/{id}/update_form")
+	public String updateForm(@PathVariable(name = "id") int boardId, Model model) {
+		
+		model.addAttribute("board", boardService.boardDetail(boardId));
+		
+		return "/board/update_form";
+	}
 
 }

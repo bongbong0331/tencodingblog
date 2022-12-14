@@ -46,4 +46,17 @@ public class BoardService {
 	public void deleteById(int id) {
 		boardRepository.deleteById(id);
 	}
+
+	@Transactional
+	public int modifyBoard(int boardId, Board board) {
+		// 영속화 되었다.
+		Board boardEntity = boardRepository.findById(boardId).orElseThrow(() -> {
+			return new IllegalArgumentException("해당 글을 찾을 수 없네요");
+		});
+		
+		boardEntity.setTitle(board.getTitle());
+		boardEntity.setContent(board.getContent());
+		// 해당 함수 종료 시점에 트랜잭션이 종료가 되고 더티 체킹하여 commit 처리를 한다.
+		return 1;
+	}
 }
