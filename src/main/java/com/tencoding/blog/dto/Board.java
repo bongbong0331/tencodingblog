@@ -46,7 +46,7 @@ public class Board {
 	// 연관 관계 설정
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")  // 컬럼명을 직접 지정
-	private User userId;
+	private User user;
 	
 	// 오브젝트를 다룰 때 가지고 와 달라고 요청해야 한다. (mappedBy)
 	// Board <----> Reply 관계
