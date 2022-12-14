@@ -31,10 +31,13 @@ public class BoardController {
 	// ?page=2
 	@GetMapping({ "", "/" })
 	public String index(Model model, 
-			@PageableDefault(size = 1, sort = "id", direction = Direction.DESC) Pageable pageable) {
+			@PageableDefault(size = 3, sort = "id", direction = Direction.DESC) Pageable pageable) {
+		
 		
 		Page<Board> boards = boardService.getBoardList(pageable);
 		
+//		page.first == true, false  < -- 첫번째 페이지 true
+//				page.last == true, false  < -- 마지막 페이지 last 
 		
 		boards.stream().forEach((item) -> {
 			System.out.println(item);
