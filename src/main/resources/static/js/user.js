@@ -7,8 +7,14 @@ let index = {
 
 		$("#btn--login").bind("click", () => {
 			this.login();
-
 		});
+		
+		$("#btn--update").bind("click", () => {
+			this.update();
+		});
+		
+		
+		
 	},
 
 	save: function() {
@@ -44,6 +50,48 @@ let index = {
 		});
 
 	},
+	
+	
+	update : function(){
+		// 하나의 객체를 만들었따 
+		let data = {
+			id : $("#id").val(),
+			password : $("#password").val(),
+			email : $("#email").val(),
+			username : $("#username").val()
+		};
+		
+		// 방어적 코드 짜보기 if else alert 벨리데이션라이브러리 
+				
+		$.ajax({
+			type : "PUT",
+			url : "/api/user",
+			data : JSON.stringify(data),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json"
+		}).done(function(data, textStatus, xhr){
+			if(data.status == "OK"){
+				alert("회원 정보 수정을 완료 하였습니다.");
+				location.href = ("/");
+			}
+		}).fail(function(error){
+			alert("회원 정보 수정에 실패 하였습니다");
+		});
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 /*	login: function() {
 
