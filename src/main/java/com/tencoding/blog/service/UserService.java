@@ -8,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.dto.User;
 import com.tencoding.blog.model.RoleType;
+import com.tencoding.blog.repository.BoardRepository;
+import com.tencoding.blog.repository.ReplyRepository;
 import com.tencoding.blog.repository.UserRepository;
+
+import lombok.Setter;
 
 // 스프링이 컴포넌트 스캔을 통하여 Bean 으로 등록해 준다 ( IoC )
 @Service
@@ -83,7 +87,7 @@ public class UserService {
 	}
 	
 	
-//	@Transactional
+	@Transactional
 	public User searchUserName(String username) {
 		
 		return userRepository.findByUsername(username).orElseGet(() -> {

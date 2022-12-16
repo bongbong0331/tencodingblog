@@ -13,6 +13,9 @@ let index = {
 			this.update();
 		});
 		
+		$("#btn-reply-save").bind("click", () => {
+			this.replySave();
+		});
 		
 	},
 
@@ -100,9 +103,41 @@ let index = {
 			console.log(error);
 			alert("글 수정이 실패 하였습니다");
 		});
-	}
+	},
+	
+	
+	replySave : function() {
+
+		let replyData = {
+			boardId: $("#board-id").val(),    // fk (board pk)
+			content: $("#content").val()
+		};
 
 
+		// ajax 통신 요청
+		$.ajax({
+			type: "POST",
+			// 쌤 꿀팁 *****************
+			url: `/api/board/${replyData.boardId}/reply`,
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(replyData),
+			dataType: "Json"
+		}).done(function(data, textStatus, xhr) {
+			console.log(data);
+			if (data.status == "OK") {
+				alert("댓글 작성이 완료 되었습니다");
+				location.href = `/board/${replyData.boardId}`;
+			}
+		}).fail(function(error) {
+			console.log(error);
+			alert("댓글작성에 실패하여어어었습니다");
+		});
+	
+	
+	
+
+
+}
 }
 
 index.init();

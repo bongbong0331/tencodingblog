@@ -7,15 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tencoding.blog.dto.Board;
+import com.tencoding.blog.dto.Reply;
 import com.tencoding.blog.dto.User;
 import com.tencoding.blog.repository.BoardRepository;
+import com.tencoding.blog.repository.ReplyRepository;
 
-@Service
+import lombok.Setter;
+
+
 // 꼭 서비스만 써야함
+@Service
 public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 
 	public void write(Board board, User user) {
 
@@ -58,5 +66,21 @@ public class BoardService {
 		boardEntity.setContent(board.getContent());
 		// 해당 함수 종료 시점에 트랜잭션이 종료가 되고 더티 체킹하여 commit 처리를 한다.
 		return 1;
+	}
+
+	@Transactional
+	public void writeReply(int boardId, Reply requestReply, User user) {
+		
+		
+		// 영속화 되었다 ! 
+		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
+					return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재하지 않습니다 . ");
+		});
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+		replyRepository.save(requestReply);
+		
+		
 	}
 }

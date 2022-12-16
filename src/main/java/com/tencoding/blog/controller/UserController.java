@@ -133,7 +133,6 @@ public class UserController {
 	ResponseEntity<KakaoProfile> kakaoDataResponse = rt2.exchange("https://kapi.kakao.com/v2/user/me ", 
 			HttpMethod.POST, kakaoDataRequest, KakaoProfile.class);
 		
-	System.out.println("kakaoDataResponse :" + kakaoDataResponse);
 	
 	// 우리 blog 서버에 로그인 처리하여 세션 처리 . . . . 진행을 해야 한다 !!!
 	
@@ -153,13 +152,11 @@ public class UserController {
 			.oauth("kakao")
 			.build();
 	
-		System.out.println("kakao --> " + kakaoUser);
 	
 		// 여기서는 user id 를 당연히 사용 못한다. 그럼 username 으로 검색하는 기능을 만들어 주어야 한다 !!
 		User originUser = userService.searchUserName(kakaoUser.getUsername());
 		
 		if(originUser.getUsername() == null) {
-			System.out.println("신규 회원이기에 회원 가입을 진행");
 			userService.saveUser(kakaoUser);
 		}
 	
@@ -172,7 +169,6 @@ public class UserController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		System.out.println("-------------------");
 		
 		return "redirect:/";
 	}

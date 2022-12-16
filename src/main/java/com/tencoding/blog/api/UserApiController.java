@@ -33,7 +33,6 @@ public class UserApiController {
 
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) {
-		System.out.println("UserApiController 호출 됨 . user : " + user);
 
 		// 1, -1 ..
 		int result = userService.saveUser(user);
@@ -46,7 +45,6 @@ public class UserApiController {
 	public ResponseDto<Integer> update(@RequestBody User user){
 		
 		//여기까지 오기전에 벨리데이션 처리... 아니면 예외 잡아서 사용자에게 떨궈 주면 된다.
-		System.out.println("user : " + user);
 		userService.updateUser(user);
 		///////////////////////////////////////////세이브 처리
 		
