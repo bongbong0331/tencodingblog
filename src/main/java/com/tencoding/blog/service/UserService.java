@@ -66,15 +66,20 @@ public class UserService {
 					return new IllegalArgumentException("해당 유저를 찾을수 없습니다");
 				});
 		
-		String rawPassword = reqUser.getPassword();
-		String encPassword = encoder.encode(rawPassword);
+		if(userEntity.getOauth() == null || userEntity.getOauth().equals("")) {
+			// 우리 사이트 회원 가입 한 자
+			String rawPassword = reqUser.getPassword();
+			String encPassword = encoder.encode(rawPassword);
+			
+			// 두개만 변경가능
+			userEntity.setUsername(reqUser.getUsername());
+			userEntity.setPassword(encPassword);
+			userEntity.setEmail(reqUser.getEmail());
+//			userEntity.setCreateDate(userEntity.getCreateDate());
+			// 더티 체킹 해서 업데이트 시킬 예정
+		}
 		
-		// 두개만 변경가능
-		userEntity.setUsername(reqUser.getUsername());
-		userEntity.setPassword(encPassword);
-		userEntity.setEmail(reqUser.getEmail());
-//		userEntity.setCreateDate(userEntity.getCreateDate());
-		// 더티 체킹 해서 업데이트 시킬 예정
+		
 	}
 	
 	
