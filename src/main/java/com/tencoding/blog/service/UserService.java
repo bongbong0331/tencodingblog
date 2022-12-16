@@ -50,6 +50,7 @@ public class UserService {
 			
 			return 1;
 		} catch (Exception e) {
+			System.out.println("세이브유저 에러발생!!!!!!!");
 			e.printStackTrace();
 		}
 		return -1;
@@ -74,6 +75,18 @@ public class UserService {
 		userEntity.setEmail(reqUser.getEmail());
 //		userEntity.setCreateDate(userEntity.getCreateDate());
 		// 더티 체킹 해서 업데이트 시킬 예정
+	}
+	
+	
+//	@Transactional
+	public User searchUserName(String username) {
+		
+		return userRepository.findByUsername(username).orElseGet(() -> {
+			return new User();
+		});
+		
+		
+		
 	}
 	
 
