@@ -1,3 +1,65 @@
+//package com.tencoding.blog.dto;
+//
+//import java.sql.Timestamp;
+//
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
+//
+//import org.hibernate.annotations.CreationTimestamp;
+//
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//
+//import lombok.AllArgsConstructor;
+//import lombok.Builder;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
+//@Entity
+//public class Reply {
+//
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private int id;
+//	
+//	@Column(nullable = false, length = 200)
+//	private String content;
+//	
+//	// board 연관 관계 처리
+//	@ManyToOne // 한개의 보드에 여러개의 리플을 남길 수 있다.
+//	@JoinColumn(name = "boardId")
+//	@JsonIgnoreProperties({"replys", "userId"})
+//	private Board board;
+//	
+//	// user 연관 관계 처리
+//	@ManyToOne // Reply <----> User (여러개의 리플을 한명의 유저가 가질 수 있다.)
+//	@JoinColumn(name = "userId")
+//	@JsonIgnoreProperties({"password", "role", "email", "oauth"})
+//	private User user;
+//	
+//	
+//	
+//	
+//	@CreationTimestamp
+//	private Timestamp createDate;
+//	
+//	
+//}
+
+
+
+
+
+
 package com.tencoding.blog.dto;
 
 import java.sql.Timestamp;
@@ -11,6 +73,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GeneratorType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,7 +81,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @NoArgsConstructor
@@ -29,29 +91,22 @@ public class Reply {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
+	private int id; 
 	@Column(nullable = false, length = 200)
-	private String content;
-	
+	private String content; 
 	// board 연관 관계 처리
-	@ManyToOne // 한개의 보드에 여러개의 리플을 남길 수 있다.
+	@ManyToOne
 	@JoinColumn(name = "boardId")
 	@JsonIgnoreProperties({"replys", "userId"})
-	private Board board;
+	private Board board; 
 	
-	// user 연관 관계 처리
-	@ManyToOne // Reply <----> User (여러개의 리플을 한명의 유저가 가질 수 있다.)
+	// user 연관 관계 처리 
+	@ManyToOne // Reply  <---> User () 
 	@JoinColumn(name = "userId")
 	@JsonIgnoreProperties({"password", "role", "email", "oauth"})
-	private User user;
-	
-	
-	
+	private User user; 
 	
 	@CreationTimestamp
 	private Timestamp createDate;
 	
-	
 }
-
