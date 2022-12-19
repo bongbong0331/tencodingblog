@@ -52,7 +52,11 @@
 			<div>${reply.content }</div>
 			<div class="d-flex">
 				<div>작성자 : &nbsp;${reply.user.username }&nbsp;&nbsp;&nbsp;</div>
-				<button class="btn btn-danger badge">삭제</button>
+				
+				<c:if test="${reply.user.id eq principal.user.id }">
+				<button class="btn btn-danger badge" onclick= "index.replyDelete(${board.id}, ${reply.id });">삭제</button>
+				</c:if>
+				
 			</div>
 		</li>
 		

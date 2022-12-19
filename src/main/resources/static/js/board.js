@@ -132,12 +132,29 @@ let index = {
 			console.log(error);
 			alert("댓글작성에 실패하여어어었습니다");
 		});
-	
-	
-	
+
+},
+		replyDelete : function(boardId, replyId){
+			
+			$.ajax({
+				type: 'DELETE',
+				url: `/api/board/${boardId}/reply/${replyId}`,
+				dataType: 'json'
+			}).done(function(resData){
+				if(resData.status == "OK"){
+					alert(" 댓글 삭제 성공 하였습니다.");
+					location.href = `/board/${boardId}`
+				}
+				
+			}).fail(function(error){
+				alert("댓글 삭제 실퍃햏ㅎ")
+			});			
+			
+			// 
+		}
 
 
-}
+
 }
 
 index.init();

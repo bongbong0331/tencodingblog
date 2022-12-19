@@ -80,7 +80,34 @@ public class BoardService {
 		requestReply.setUser(user);
 		requestReply.setBoard(board);
 		replyRepository.save(requestReply);
+	}
+	
+	@Transactional
+	public void deleteReplyById(int replyId, int requestUserId) {
+		
+		System.out.println("requestUserId : " + requestUserId);
+		
+		Reply replyEntity = replyRepository.findById(replyId).orElseThrow(() -> {
+			 return new IllegalArgumentException("해당 글을 찾을 수 없다 ");
+		});
+		
+		try {
+			int dbWriter = replyEntity.getUser().getId();
+			int principalId = requestUserId;
+			
+			if(dbWriter == principalId) {
+				replyRepository.deleteById(replyId);
+			}else {
+				throw new IllegalArgumentException("본인이 작성한 글이 아닙니다 ");
+			}
+		} catch (Exception e) {
+			
+		}
+		
+		
+		
 		
 		
 	}
+	
 }
