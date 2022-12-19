@@ -64,7 +64,7 @@ public class BoardController {
 //		블럭 숫자에는 - 값을 보여주면 안된다.
 
 		ArrayList<Integer> pageNumbers = new ArrayList<>();
-		for(int i = startPageNumber; i < endPageNumber; i++) {
+		for(int i = startPageNumber; i <= endPageNumber; i++) {
 			pageNumbers.add(i);
 		}
 		
