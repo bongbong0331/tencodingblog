@@ -2,9 +2,9 @@
 
 	<br>
 	<div class="jumbotron text-center" style="margin-bottom: 0px">
-		<p>Create by cobong</p>
-		<p>☏ 010-1234-1234</p>
-		<p>🌆 제주도</p>
+		<p>Create by bongbong</p>
+		<p>☏ 010-1234-5678</p>
+		<p>🌆 카타르</p>
 	</div>
 
 

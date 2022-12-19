@@ -42,7 +42,7 @@ public class BoardController {
 		String searchTitle = q == null ? "" : q;
 //		Page<Board> boards = boardService.getBoardList(pageable);
 		System.out.println("searchTitle:"+searchTitle);
-		Page<Board> boards = boardService.searchBoard(searchTitle.replace("//", "") ,pageable);
+		Page<Board> boards = boardService.searchBoard(searchTitle ,pageable);
 		
 		
 		

@@ -41,10 +41,14 @@ page.last == true, false  < -- 마지막 페이지 last
 			<c:when test="${nowPage eq num }">
 			<!-- http://localhost:9090/board/search?q=%EC%95%84%EB%8B%88 -->
 			<!-- 0 부터 시작 컨트롤러에서 +1 -->
-				<li class="page-item active"><a class="page-link" href="?page=${num - 1 }">${num }</a></li>
+				<li class="page-item active">
+				<a class="page-link" href="?q=${q }&page=${num - 1 }">${num }</a>
+				</li>
 			</c:when>
 			<c:otherwise>
-				<li class="page-item"><a class="page-link" href="?page=${num - 1 }">${num }</a></li>
+				<li class="page-item">
+				<a class="page-link" href="?q=${q }&page=${num - 1 }">${num }</a>
+				</li>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>	
@@ -52,6 +56,8 @@ page.last == true, false  < -- 마지막 페이지 last
 	<li class="page-item ${boards.last ? isDisabled : isNotDisabled }"><a class="page-link" href="?page=${boards.number + 1 }">Next</a></li>
 
 </ul>
+
+
 </div>
 
 
