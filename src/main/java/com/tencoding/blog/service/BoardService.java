@@ -14,14 +14,13 @@ import com.tencoding.blog.repository.ReplyRepository;
 
 import lombok.Setter;
 
-
 // 꼭 서비스만 써야함
 @Service
 public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
-	
+
 	@Autowired
 	private ReplyRepository replyRepository;
 
@@ -61,7 +60,7 @@ public class BoardService {
 		Board boardEntity = boardRepository.findById(boardId).orElseThrow(() -> {
 			return new IllegalArgumentException("해당 글을 찾을 수 없네요");
 		});
-		
+
 		boardEntity.setTitle(board.getTitle());
 		boardEntity.setContent(board.getContent());
 		// 해당 함수 종료 시점에 트랜잭션이 종료가 되고 더티 체킹하여 commit 처리를 한다.
@@ -70,44 +69,43 @@ public class BoardService {
 
 	@Transactional
 	public void writeReply(int boardId, Reply requestReply, User user) {
-		
-		
-		// 영속화 되었다 ! 
+
+		// 영속화 되었다 !
 		Board board = boardRepository.findById(boardId).orElseThrow(() -> {
-					return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재하지 않습니다 . ");
+			return new IllegalArgumentException("댓글 쓰기 실패 : 게시글이 존재하지 않습니다 . ");
 		});
-		
+
 		requestReply.setUser(user);
 		requestReply.setBoard(board);
 		replyRepository.save(requestReply);
 	}
-	
+
 	@Transactional
 	public void deleteReplyById(int replyId, int requestUserId) {
-		
+
 		System.out.println("requestUserId : " + requestUserId);
-		
+
 		Reply replyEntity = replyRepository.findById(replyId).orElseThrow(() -> {
-			 return new IllegalArgumentException("해당 글을 찾을 수 없다 ");
+			return new IllegalArgumentException("해당 글을 찾을 수 없다 ");
 		});
-		
+
 		try {
 			int dbWriter = replyEntity.getUser().getId();
 			int principalId = requestUserId;
-			
-			if(dbWriter == principalId) {
+
+			if (dbWriter == principalId) {
 				replyRepository.deleteById(replyId);
-			}else {
+			} else {
 				throw new IllegalArgumentException("본인이 작성한 글이 아닙니다 ");
 			}
 		} catch (Exception e) {
-			
 		}
-		
-		
-		
-		
-		
 	}
 	
+	@Transactional
+	public Page<Board> searchBoard(String q, Pageable pageable){
+		
+		return boardRepository.findByTitleContaining(q, pageable);
+	}
+
 }

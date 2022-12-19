@@ -3,6 +3,16 @@
 
 
 
+<div class="container">
+
+	<div class="d-flex justify-content-end m-2">
+	
+			<form class="form-inline" action="/board/search" method="get" >
+				<input class="form-control mr-1" type="text" placeholder="검색어를 입력하이소" name="q" value="${q }">
+				<button class="btn btn-warning " type="submit">TITLE</button>
+			</form>
+	</div>
+
 
 <c:forEach var="board" items="${boards.content}">
 
@@ -13,6 +23,7 @@
 		</div>
 	</div>
 </c:forEach>
+
 
 <!--
 page.first == true, false  < -- 첫번째 페이지 true
@@ -28,6 +39,7 @@ page.last == true, false  < -- 마지막 페이지 last
 	<c:forEach var="num" items="${pageNumbers }">
 		<c:choose>
 			<c:when test="${nowPage eq num }">
+			<!-- http://localhost:9090/board/search?q=%EC%95%84%EB%8B%88 -->
 			<!-- 0 부터 시작 컨트롤러에서 +1 -->
 				<li class="page-item active"><a class="page-link" href="?page=${num - 1 }">${num }</a></li>
 			</c:when>
@@ -40,6 +52,9 @@ page.last == true, false  < -- 마지막 페이지 last
 	<li class="page-item ${boards.last ? isDisabled : isNotDisabled }"><a class="page-link" href="?page=${boards.number + 1 }">Next</a></li>
 
 </ul>
+</div>
+
+
 
 <%@ include file="layout/footer.jsp"%>
 

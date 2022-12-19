@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tencoding.blog.auth.PrincipalDetail;
 import com.tencoding.blog.dto.Board;
@@ -21,7 +22,7 @@ import com.tencoding.blog.service.BoardService;
 @Controller
 public class BoardController {
 
-	/**
+	/*
 	 * 
 	 * 로그인 인증되면 컨트롤러에서 어떻게 세션을 찾을까??
 	 * 
@@ -29,13 +30,25 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	
 
 	// ?page=2
-	@GetMapping({ " " , "/" })
-	public String index(Model model,
+	@GetMapping({ " " , "/", "/board/search" })
+	public String index(@RequestParam(required = false) String q, Model model,
 			@PageableDefault(size = 3, sort = "id", direction = Direction.DESC) Pageable pageable) {
+		
+		// 검색 요청 값을 받아서 처리
+		String searchTitle = q == null ? "" : q;
+//		Page<Board> boards = boardService.getBoardList(pageable);
+		System.out.println("searchTitle:"+searchTitle);
+		Page<Board> boards = boardService.searchBoard(searchTitle.replace("//", "") ,pageable);
+		
+		
+		
+		
 
-		Page<Board> boards = boardService.getBoardList(pageable);
+//		Page<Board> boards = boardService.getBoardList(pageable);
 		int PAGENATION_BLOCK_COUNT = 3;
 		
 //		page.first == true, false  < -- 첫번째 페이지 true
@@ -73,6 +86,7 @@ public class BoardController {
 		model.addAttribute("startPageNumber",startPageNumber);
 		model.addAttribute("endPageNumber",endPageNumber);
 		model.addAttribute("pageNumbers",pageNumbers);
+		model.addAttribute("q", searchTitle);
 		
 		
 		return "index";
