@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.tencoding.blog.auth.PrincipalDetailService;
 
@@ -63,10 +64,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable();    // 개발 완료 전 테스트 시 사용 ( 실 서비스 시 풀어 사용하지 말길 권장 )
+//		http.csrf().disable();    // 개발 완료 전 테스트 시 사용 ( 실 서비스 시 풀어 사용하지 말길 권장 )
+		
 		
 		http
-			.authorizeHttpRequests()
+			.csrf()
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.and()
+		
+		
+				.authorizeHttpRequests()
 				.antMatchers("/auth/**", "/", "/js/**", "/image/**", "/css/**", "/test/**")
 				.permitAll()
 				.anyRequest()

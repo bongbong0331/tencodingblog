@@ -23,8 +23,8 @@ let index = {
 
 	save: function() {
 		let xCheckTitle = XSSCheck($("#title").val());
-		console.log(xCheckTitle);
-
+		let token = $("meta[name='_csrf']").attr("content");
+		let csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
 		let data = {
 			title: xCheckTitle,
@@ -35,6 +35,9 @@ let index = {
 		// ajax 통신 요청
 
 		$.ajax({
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type: "POST",
 			url: "/api/board",
 			contentType: "application/json; charset=utf-8",
@@ -64,11 +67,17 @@ let index = {
 
 
 	deleteById: function() {
+		
+		let token = $("meta[name='_csrf']").attr("content");
+		let csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
 		let id = $("#board-id").val();      // text val 차이 
 
 		// 통신 ---> ajax
 		$.ajax({
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type: "DELETE",
 			url: "/api/board/" + id
 
@@ -84,17 +93,23 @@ let index = {
 	},
 
 	update: function() {
+		
+		let token= $("meta[name='_csrf']").attr("content");
+		let csrfHeader= $("meta[name='_csrf_header']").attr("content");
 
 		// html 태그에 직접 속성을 정의할 수 있다. 규칙은 data-*
 		// data-* 값을 가지고 오기 위해서 Jquery --> (선택자).arrt("data-[id]")
 		let boardId = $("#board-id").attr("data-id");
-
+		
 		let data = {
 			title: $("#title").val(),
 			content: $("#content").val()
 		}
 
 		$.ajax({
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type: "PUT",
 			url: "/api/board/" + boardId,
 			data: JSON.stringify(data),
@@ -113,6 +128,8 @@ let index = {
 
 
 	replySave: function() {
+		let token= $("meta[name='_csrf']").attr("content");
+		let csrfHeader= $("meta[name='_csrf_header']").attr("content");
 
 		let replyData = {
 			boardId: $("#board-id").val(),    // fk (board pk)
@@ -122,6 +139,9 @@ let index = {
 
 		// ajax 통신 요청
 		$.ajax({
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type: "POST",
 			// 쌤 꿀팁 *****************
 			url: `/api/board/${replyData.boardId}/reply`,
@@ -140,9 +160,19 @@ let index = {
 		});
 
 	},
+	
+	
+	
+	
 	replyDelete: function(boardId, replyId) {
-
+		let token= $("meta[name='_csrf']").attr("content");
+		let csrfHeader= $("meta[name='_csrf_header']").attr("content");
+			
+			
 		$.ajax({
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type: 'DELETE',
 			url: `/api/board/${boardId}/reply/${replyId}`,
 			dataType: 'json'
