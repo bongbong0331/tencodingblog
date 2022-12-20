@@ -4,7 +4,7 @@
 	extends="lucy-xss-default-sax.xml">
 
 	<elementRule>
-		<element name="body" disable="true" /> <!-- <BODY ONLOAD=alert("XSS")>, <BODY BACKGROUND="javascript:alert('XSS')"> -->
+		<element name="body" disable="false" /> <!-- <BODY ONLOAD=alert("XSS")>, <BODY BACKGROUND="javascript:alert('XSS')"> -->
 		<element name="embed" disable="true" />
 		<element name="iframe" disable="true" /> <!-- <IFRAME SRC=”http://hacker-site.com/xss.html”> -->
 		<element name="meta" disable="true" />

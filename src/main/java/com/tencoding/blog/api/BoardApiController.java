@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tencoding.blog.auth.PrincipalDetail;
 import com.tencoding.blog.dto.Board;
@@ -26,15 +27,37 @@ public class BoardApiController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@PostMapping("/api/board")
-	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail detail) {
-
-		// 아작스 통신으로 넘겨 받아서 받은 데이터 콘솔에 뿌려 보기
-
-		boardService.write(board, detail.getUser());
-
-		return new ResponseDto<Integer>(HttpStatus.OK, 1);
-	}
+	
+//	//아작스 통신
+//	// 약속 - aplication/json
+//	// x-www-formurllexm ||
+//	@PostMapping("/api/board")
+//	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail detail) {
+//		
+//		// 아작스 통신으로 넘겨 받아서 받은 데이터 콘솔에 뿌려 보기
+//
+//		boardService.write(board, detail.getUser());
+//
+//		return new ResponseDto<Integer>(HttpStatus.OK, 1);
+//	}
+	
+	
+	
+//	// form 으로 접속 해보기
+//	@PostMapping("/api/board")
+//	public ModelAndView save(Board board, @AuthenticationPrincipal PrincipalDetail detail) {
+//
+//		// 아작스 통신으로 넘겨 받아서 받은 데이터 콘솔에 뿌려 보기
+//		System.out.println("rrrggewgweewgwgwgwgwgwgewgewgewgewg");
+//		boardService.write(board, detail.getUser());
+//
+//		ModelAndView mav = new ModelAndView("redirect:/");
+//		
+//		return mav;
+//	}
+	
+	
+	
 
 	@DeleteMapping("/api/board/{id}")
 	public ResponseDto<Integer> deleteById(@PathVariable int id) {
@@ -79,5 +102,7 @@ public class BoardApiController {
 
 		return new ResponseDto<Integer>(HttpStatus.OK, 1);
 	}
+	
+	
 
 }

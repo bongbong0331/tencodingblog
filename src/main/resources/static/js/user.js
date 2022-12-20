@@ -65,6 +65,11 @@ let index = {
 	
 	
 	update : function(){
+		
+		let token = $("meta[name='_csrf']").attr("content");
+		let csrfHeader = $("meta[name='_csrf_header']").attr("content");
+		
+		
 		// 하나의 객체를 만들었따 
 		let data = {
 			id : $("#id").val(),
@@ -76,6 +81,9 @@ let index = {
 		// 방어적 코드 짜보기 if else alert 벨리데이션라이브러리 
 				
 		$.ajax({
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(csrfHeader, token);
+			},
 			type : "PUT",
 			url : "/api/user",
 			data : JSON.stringify(data),

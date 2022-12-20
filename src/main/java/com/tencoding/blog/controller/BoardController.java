@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tencoding.blog.auth.PrincipalDetail;
 import com.tencoding.blog.dto.Board;
+import com.tencoding.blog.dto.ResponseDto;
 import com.tencoding.blog.service.BoardService;
 
 @Controller
@@ -113,5 +116,21 @@ public class BoardController {
 		
 		return "/board/update_form";
 	}
+	
+	
+	
+	// form 으로 하기 
+	@PostMapping("/api/board")
+	public String save(Board board, @AuthenticationPrincipal PrincipalDetail detail) {
+		
+		// 아작스 통신으로 넘겨 받아서 받은 데이터 콘솔에 뿌려 보기
+
+		boardService.write(board, detail.getUser());
+
+		return "redirect:/";
+	}
+	
+	
+	
 
 }

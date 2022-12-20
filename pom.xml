@@ -35,13 +35,13 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-		<!-- lucy-xss-servlet-filter -->
+		<!-- lucy-xss-servlet-filter 별로 안좋아 보여서 우선 주석
 		<dependency>
 			<groupId>com.navercorp.lucy</groupId>
 			<artifactId>lucy-xss-servlet</artifactId>
 			<version>2.0.0</version>
 		</dependency>
-
+								-->
 
 		<!-- 추가 라이브러리 종료 -->
 

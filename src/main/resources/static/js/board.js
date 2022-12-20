@@ -189,6 +189,7 @@ let index = {
 }
 
 
+
 function XSSCheck(str, level) {
 	if (level == undefined || level == 0) {
 		str = str.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, "홍길동맨");
@@ -198,6 +199,10 @@ function XSSCheck(str, level) {
 	}
 	return str;
 }
+
+
+
+
 
 
 index.init();
